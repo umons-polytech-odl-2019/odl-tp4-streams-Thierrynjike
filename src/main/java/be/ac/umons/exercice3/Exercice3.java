@@ -55,9 +55,9 @@ public class Exercice3 {
     }
 
     public static void main(String[] args) {
-        System.out.println("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-        System.out.println("┣ Collections and Streams (Classroom) ┫" );
-        System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        System.out.println("\n***************************************");
+        System.out.println("* Collections and Streams (Classroom) *" );
+        System.out.println("***************************************\n");
 
         Classroom classroom = new Classroom();
         fillClassroom(classroom);

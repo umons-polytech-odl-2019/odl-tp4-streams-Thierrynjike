@@ -1,6 +1,7 @@
 package be.ac.umons.exercice2;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 
@@ -35,14 +36,14 @@ public class Student {
             count++;
             totalScore += score;
         }
-        return totalScore / count;
+       // return totalScore / count;
+        return scoreByCourse.values().stream().mapToInt(Integer::intValue).average().getAsDouble();
     }
 
     public String bestCourse() {
 
         String bestCourse = "";
         Integer bestScore = 0;
-
         for (Map.Entry<String, Integer> e : scoreByCourse.entrySet()) {
             if (e.getValue() > bestScore) {
                 bestCourse = e.getKey();
@@ -50,7 +51,8 @@ public class Student {
             }
         }
 
-        return bestCourse;
+        //return bestCourse;
+        return scoreByCourse.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).findFirst().map(Map.Entry::getKey).toString();
     }
 
     public int bestScore() {
@@ -60,8 +62,8 @@ public class Student {
             if (entry.getValue() > bestScore)
                 bestScore = entry.getValue();
         }
-        return bestScore;
-
+        //return bestScore;
+        return scoreByCourse.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).findFirst().map(Map.Entry::getValue).orElse(0);
     }
 
     public Set<String> failedCourses() {
@@ -77,7 +79,8 @@ public class Student {
         for (Map.Entry<String, Integer> entry : filteredEntries) {
             failedCourses.add(entry.getKey());
         }
-        return failedCourses;
+        //return failedCourses;
+        return scoreByCourse.entrySet().stream().filter(entry->entry.getValue()<12).map(Map.Entry::getKey).collect(Collectors.toCollection(HashSet::new));
     }
 
     public boolean isSuccessful() {

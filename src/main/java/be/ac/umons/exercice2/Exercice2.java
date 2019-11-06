@@ -14,9 +14,9 @@ public class Exercice2 {
 
     public static void main(String[] args) {
 
-        System.out.println("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-        System.out.println("┣ Collections and Streams (Student) ┫" );
-        System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        System.out.println("\n/-----------------------------------\\");
+        System.out.println("| Collections and Streams (Student) |" );
+        System.out.println("\\-----------------------------------/\n");
 
         TreeMap<String, Student> students = new TreeMap<String, Student>();
         students.put("Stannis Baratheon", new Student("Stannis Baratheon", "012345"));

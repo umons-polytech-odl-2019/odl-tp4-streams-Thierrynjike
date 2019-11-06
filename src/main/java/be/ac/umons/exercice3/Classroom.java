@@ -30,7 +30,8 @@ public class Classroom {
                 cpt++;
             }
         }
-        return (sum / cpt);
+        //return (sum / cpt);
+        return students.stream().flatMapToInt(student->student.getScoreByCourse().values().parallelStream().mapToInt(Integer::intValue)).average().orElse(0.0);
     }
 
     public int countStudents() {
@@ -63,7 +64,7 @@ public class Classroom {
         List<Student> studentList = new ArrayList<>();
         for (Student s : studentSet)
             studentList.add(s);
-        return studentList;
-
+        //return studentList;
+        return students.stream().filter(Student::isSuccessful).sorted(Comparator.comparingDouble(student->-student.averageScore())).collect(Collectors.toList());
     }
 }

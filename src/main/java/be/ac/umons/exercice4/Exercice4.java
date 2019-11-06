@@ -20,9 +20,9 @@ import java.util.stream.Stream;
 public class Exercice4 {
 
     public static void main(String[] args) {
-        System.out.println("\n┏━━━━━━━━━━━━━━━━━━━━━━━┓");
-        System.out.println("┣ MAP REDUCE WORD COUNT ┫" );
-        System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━┛\n");
+        System.out.println("\n*****************************");
+        System.out.println("*� MAP REDUCE WORD COUNT *" );
+        System.out.println("*******************************\n");
 
         String filePath = null;
 
@@ -37,10 +37,10 @@ public class Exercice4 {
             String regex = new String("[ ,\\.;:'\\-_()\\=’\\|\\[\\]\\{\\}\"@\\*#/\\?\\!«»]");
 
             Map<String, Long> words =
-                    stream.flatMap(line -> Arrays.stream(line.split(regex)))  // découpe en utilisant une regex pour trouver les séparateurs
-                    .filter(line -> Optional.ofNullable(line).orElse("").length() != 0)  // enlève les lignes vides
-                    .filter(word -> word.length() >= 6 && word.length() <= 12)  // garde uniquement les mots d'une longueur de 6 à 12 lettres
-                    .map(String::toLowerCase)  // les mets tous en minuscule
+                    stream.flatMap(line -> Arrays.stream(line.split(regex))).parallel()  // découpe en utilisant une regex pour trouver les séparateurs
+                    .filter(line -> Optional.ofNullable(line).orElse("").length() != 0).parallel()  // enlève les lignes vides
+                    .filter(word -> word.length() >= 6 && word.length() <= 12).parallel() // garde uniquement les mots d'une longueur de 6 à 12 lettres
+                    .map(String::toLowerCase).parallel()  // les mets tous en minuscule
                     .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())); // rassemble dans la map les mots en comptant le nombre d'occurences
 
             System.out.println("Word count done.");
